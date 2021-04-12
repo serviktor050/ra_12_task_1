@@ -17,7 +17,7 @@ import {
   searchSkillsRequest,
   searchSkillsSuccess,
   searchSkillsFailure,
-} from "../actions/actionCreators";
+} from "../actions/actionCreator";
 import { of } from "rxjs";
 
 export const changeSearchEpic = (action$) =>
@@ -36,10 +36,12 @@ export const searchSkillsEpic = (action$) =>
     map((o) => new URLSearchParams({ q: o })),
     tap((o) => console.log(o)),
     switchMap((o) =>
-      ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}?${o}`).pipe(
-        retry(3),
-        map((o) => searchSkillsSuccess(o)),
-        catchError((e) => of(searchSkillsFailure(e)))
-      )
+      ajax
+        .getJSON(`https://ra-12-task-1-server.herokuapp.com/api/search?${o}`)
+        .pipe(
+          retry(3),
+          map((o) => searchSkillsSuccess(o)),
+          catchError((e) => of(searchSkillsFailure(e)))
+        )
     )
   );
