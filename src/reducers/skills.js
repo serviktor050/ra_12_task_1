@@ -11,7 +11,6 @@ const initialState = {
   loading: false,
   error: null,
   search: "",
-  emptySearch: false,
 };
 
 export default function skillsReducer(state = initialState, action) {
@@ -45,8 +44,8 @@ export default function skillsReducer(state = initialState, action) {
       };
     case EMPTY_SEARCH_FIELD:
       return {
-        items: [1, 2, 3],
-        emptySearch: true,
+        items: [],
+        search: "",
       };
     default:
       return state;

@@ -3,12 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { changeSearchField } from "../actions/actionCreator";
 
 export default function Skills() {
-  const { items, loading, error, search, emptySearch } = useSelector(
+  const { items, loading, error, search } = useSelector(
     (state) => state.skills
   );
 
-  console.log(items);
-  //console.log(emptySearch);
   const dispatch = useDispatch();
 
   const handleSearch = (evt) => {
